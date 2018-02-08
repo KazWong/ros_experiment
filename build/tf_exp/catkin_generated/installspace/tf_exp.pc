@@ -1,8 +1,0 @@
-prefix=/home/sae/gen2/experiment/install
-
-Name: tf_exp
-Description: Description of tf_exp
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/sae/gen2/experiment/install/lib 
-Requires: 
