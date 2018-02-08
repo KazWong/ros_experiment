@@ -59,7 +59,7 @@ bool LookforTransform(string const target_frame, string const source_frame, s_Po
  // tf::TransformListener listener;
   tf::StampedTransform transform;
   ros::Time t = ros::Time::now();
-  t -= ros::Duration(0.1);
+  t -= ros::Duration(0.05);
   try{
     nlistener->waitForTransform( target_frame, source_frame, t, ros::Duration(wait_tf));
     nlistener->lookupTransform( target_frame, source_frame, t, transform);
