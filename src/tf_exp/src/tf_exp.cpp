@@ -179,14 +179,12 @@ int main(int argc, char **argv) {
   parking_no = argv[1];//"ar_parked_HT";
   ref_frame = argv[2];//"shoulder_link";
   
-  init(argc, argv, "parking_server");
+  init(argc, argv, "tf_exp");
   NodeHandle n;
   np = &n;
   nlistener = new tf::TransformListener(ros::Duration(listener_buf));
 
   setSTwist(0.0, 0.0, 0.0, zero_twist);
-
-  ROS_INFO("Ready to park...");
   park();
 
   return 0;
