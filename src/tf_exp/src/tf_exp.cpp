@@ -15,8 +15,8 @@ typedef geometry_msgs::Twist s_Pose;
 typedef geometry_msgs::Twist s_Twist;
 
 
-const double wait_tf = 0.1; //12Hz max 0.042 each in WaitForTranform
-const double listener_buf = 10.0;
+const double wait_tf = 0.015; //12Hz max 0.042 each in WaitForTranform
+const double listener_buf = 0.1;
 
 string parking_no;
 string ref_frame;
@@ -58,30 +58,36 @@ void convertTFtoPose(const tf::Pose pose, s_Pose &pose_diff)
 bool LookforTransform(string const target_frame, string const source_frame, s_Pose &pose) {
  // tf::TransformListener listener;
   tf::StampedTransform transform;
-
+  ros::Time t = ros::Time::now();
+  t -= ros::Duration(0.001);
   try{
-    //nlistener->waitForTransform( target_frame, source_frame, Time::now(), ros::Duration(wait_tf));
-    nlistener->lookupTransform( target_frame, source_frame, Time(0), transform);
-    //nlistener->lookupTransform( target_frame, Time(0), source_frame, Time(-0.5), "map", transform);
+    nlistener->waitForTransform( target_frame, source_frame, t, ros::Duration(wait_tf));
+    nlistener->lookupTransform( target_frame, source_frame, t, transform);
+    //nlistener->lookupTransform( target_frame, Time(0), source_frame, Time(0), "map", transform);
   }
   catch (tf::TransformException ex){
     ROS_ERROR("%s",ex.what());
     return false;
   }
 
+  cout << "tf Time " << transform.stamp_.sec << "." << transform.stamp_.nsec << endl;
   convertTFtoPose(transform, pose);
   return true;
 }
 
 bool FramesDistance(string const ref_frame, string const robo_frame, string const target_frame, s_Pose &curr_agv_pose, s_Pose &goal_pose,s_Pose &pose_diff) {
+  ros::Time t = ros::Time::now();
+  cout << "Timenow1 " << t.sec << "." << t.nsec << endl;
   if (!LookforTransform(ref_frame, robo_frame, curr_agv_pose))
+    return false;
+  t = ros::Time::now();
+  cout << "Timenow2 " << t.sec << "." << t.nsec << endl;
+  if (!LookforTransform(ref_frame, target_frame, goal_pose))
     return false;
   cout << "agv_x = " << curr_agv_pose.linear.x << endl;
   cout << "agv_y = " << curr_agv_pose.linear.y << endl;
   cout << "agv_omega = " << curr_agv_pose.angular.z << endl;
   cout << robo_frame << endl;
-  if (!LookforTransform(ref_frame, target_frame, goal_pose))
-    return false;
   cout << "goal_x = " << goal_pose.linear.x << endl;
   cout << "goal_y = " << goal_pose.linear.y << endl;
   cout << "goal_omega = " << goal_pose.angular.z << endl;
@@ -92,7 +98,7 @@ bool FramesDistance(string const ref_frame, string const robo_frame, string cons
   cout << "dx = " << pose_diff.linear.x << endl;
   cout << "dy = " << pose_diff.linear.y << endl;
   cout << "domega = " << pose_diff.angular.z << endl;
-  cout << endl << endl;
+  cout << endl;
 
   return true;
 }
@@ -128,8 +134,8 @@ bool checkReadyToPark(string const parking_no, string const ref_frame)
 bool park()
 {
   Time last_time = Time::now();
-  s_Pose curr_agv_pose, goal_pose;
-  s_Pose pose_diff;
+  //s_Pose curr_agv_pose, goal_pose;
+  //s_Pose pose_diff;
   s_Twist v_bc;
 
   if (!checkReadyToPark(parking_no, ref_frame)) { 
@@ -138,18 +144,24 @@ bool park()
   }
 
 //init K controller var
-  last_time = Time::now();
+  //last_time = Time::now();
  // ROS_INFO("Before check base_footprint");
-  FramesDistance(ref_frame, "ur_base", parking_no, curr_agv_pose, goal_pose, pose_diff);
+  //FramesDistance(ref_frame, "ur_base", parking_no, curr_agv_pose, goal_pose, pose_diff);
 //  ROS_INFO("After check base_footprint");
-  setSTwist(pose_diff.linear.x, pose_diff.linear.y, pose_diff.angular.z, last_err);
+  //setSTwist(pose_diff.linear.x, pose_diff.linear.y, pose_diff.angular.z, last_err);
   //setSTwist(0, 0, 0, last_err);
  
 
  // ROS_INFO("1st base_footprint");
   ros::Rate rate(12.0);
   while (ros::ok()) {
+    s_Pose curr_agv_pose, goal_pose;
+    s_Pose pose_diff;
     bool got_AR_Tf = false;
+    
+    setSPose(0.0, 0.0, 0.0, pose_diff);
+    setSPose(0.0, 0.0, 0.0, goal_pose);
+    setSPose(0.0, 0.0, 0.0, curr_agv_pose);
 
     double dt = (Time::now() - last_time).toSec();
     last_time = Time::now();

@@ -18,7 +18,7 @@ int main(int argc, char** argv){
 
   while(n.ok()){
     ros::Time t = ros::Time::now();
-    //t += ros::Duration(0.0);
+    t += ros::Duration(0.5);
     
     q.setRPY(2.101, -1.434, 2.642);
     broadcaster.sendTransform(
