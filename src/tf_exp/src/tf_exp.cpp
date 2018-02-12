@@ -76,8 +76,10 @@ bool LookforTransform(string const target_frame, string const source_frame, s_Po
     return false;
   }
   
-  if (time == transform.stamp_ && time != Time(0))
+  if (time == transform.stamp_ && time != Time(0)) {
+    ROS_ERROR("Repeated Transform");
     return false;
+  }
 
   time = transform.stamp_;
 
