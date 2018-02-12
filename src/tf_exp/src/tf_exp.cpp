@@ -92,8 +92,8 @@ bool FramesDistance(string const ref_frame, string const robo_frame, string cons
   if (!LookforTransform(ref_frame, robo_frame, curr_agv_pose, curr_time)) {
     return false;
   } else {
-    cout <<"Delay    " << (Time::now() - curr_time).toSec() << endl;
-    total_curr +=curr_time.toSec();
+    cout <<"Delay    " << (t - curr_time).toSec() << endl;
+    total_curr += (t - curr_time).toSec();
     curr_counter++;
     cout <<"Avg      " << (total_curr/curr_counter) << endl;
     
@@ -103,8 +103,8 @@ bool FramesDistance(string const ref_frame, string const robo_frame, string cons
   if (!LookforTransform(ref_frame, target_frame, goal_pose, goal_time)) {
     return false;
   } else {
-    cout <<"Delay    " << (Time::now() - goal_time).toSec() << endl;
-    total_goal +=goal_time.toSec();
+    cout <<"Delay    " << (t - goal_time).toSec() << endl;
+    total_goal += (t - curr_time).toSec();
     goal_counter++;
     cout <<"Avg      " << (total_goal/goal_counter) << endl;
   }
