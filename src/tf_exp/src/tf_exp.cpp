@@ -60,7 +60,7 @@ void convertTFtoPose(const tf::Pose pose, s_Pose &pose_diff)
 bool LookforTransform(string const target_frame, string const source_frame, s_Pose &pose, Time &time) {
  // tf::TransformListener listener;
   tf::StampedTransform transform;
-  ros::Time t = ros::Time::now();
+  //ros::Time t = ros::Time::now();
   //t -= ros::Duration(0.05);
   try{
     //nlistener->waitForTransform( target_frame, source_frame, t, ros::Duration(wait_tf));
@@ -72,7 +72,7 @@ bool LookforTransform(string const target_frame, string const source_frame, s_Po
     return false;
   }
   
-  if (time == transform.stamp_)
+  if (time == transform.stamp_ && time != Time(0))
     return false;
 
   time = transform.stamp_;
