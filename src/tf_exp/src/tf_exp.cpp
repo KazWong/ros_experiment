@@ -134,6 +134,7 @@ bool checkReadyToPark(string const parking_no, string const ref_frame)
 bool park()
 {
   Time last_time = Time::now();
+  int lost_counter = 0;
   //s_Pose curr_agv_pose, goal_pose;
   //s_Pose pose_diff;
   s_Twist v_bc;
@@ -166,8 +167,11 @@ bool park()
     double dt = (Time::now() - last_time).toSec();
     last_time = Time::now();
     cout << "dt = " << dt << endl;
+    cout << "lost count = " << lost_counter << endl;
     got_AR_Tf =  FramesDistance(ref_frame, "ur_base", parking_no, curr_agv_pose, goal_pose, pose_diff);
 
+    if (!got_AR_Tf)
+      lost_counter++;
     spinOnce();
     rate.sleep();
   }
