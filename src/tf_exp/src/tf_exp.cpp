@@ -110,6 +110,7 @@ bool FramesDistance(string const ref_frame, string const robo_frame, string cons
     goal_counter++;
     cout <<"Avg      " << (total_goal/goal_counter) << endl;
   }
+/*
   cout << "agv_x = " << curr_agv_pose.linear.x << endl;
   cout << "agv_y = " << curr_agv_pose.linear.y << endl;
   cout << "agv_omega = " << curr_agv_pose.angular.z << endl;
@@ -120,10 +121,11 @@ bool FramesDistance(string const ref_frame, string const robo_frame, string cons
 
   setSPose(curr_agv_pose.linear.x - goal_pose.linear.x, 
             curr_agv_pose.linear.y - goal_pose.linear.y, 
-            curr_agv_pose.angular.z - goal_pose.angular.z/* + 3.14*/, pose_diff);
+            curr_agv_pose.angular.z - goal_pose.angular.z/* + 3.14, pose_diff);
   cout << "dx = " << pose_diff.linear.x << endl;
   cout << "dy = " << pose_diff.linear.y << endl;
   cout << "domega = " << pose_diff.angular.z << endl;
+*/
   cout << endl;
 
   return true;
