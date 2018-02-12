@@ -15,8 +15,8 @@ typedef geometry_msgs::Twist s_Pose;
 typedef geometry_msgs::Twist s_Twist;
 
 
-const double wait_tf = 0.05; //12Hz max 0.042 each in WaitForTranform
-const double listener_buf = 0.7;
+const double wait_tf = 0.02; //12Hz max 0.042 each in WaitForTranform
+const double listener_buf = 0.1;
 
 string parking_no;
 string ref_frame;
