@@ -104,7 +104,7 @@ bool FramesDistance(string const ref_frame, string const robo_frame, string cons
     return false;
   } else {
     cout <<"Delay    " << (t - goal_time).toSec() << endl;
-    total_goal += (t - curr_time).toSec();
+    total_goal += (t - goal_time).toSec();
     goal_counter++;
     cout <<"Avg      " << (total_goal/goal_counter) << endl;
   }
