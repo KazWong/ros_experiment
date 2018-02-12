@@ -76,12 +76,12 @@ bool LookforTransform(string const target_frame, string const source_frame, s_Po
     return false;
   }
   
+  time = transform.stamp_;
+  
   if (time == transform.stamp_ && time != Time(0)) {
     ROS_ERROR("Repeated Transform");
     return false;
   }
-
-  time = transform.stamp_;
 
   cout << "tf Time  " << transform.stamp_.sec << "." << transform.stamp_.nsec << endl;
   convertTFtoPose(transform, pose);
@@ -103,6 +103,7 @@ bool FramesDistance(string const ref_frame, string const robo_frame, string cons
   t = ros::Time::now();
   cout << "Timenow2 " << t.sec << "." << t.nsec << endl;
   if (!LookforTransform(ref_frame, target_frame, goal_pose, goal_time)) {
+    cout <<"Delay    " << (t - goal_time).toSec() << endl;
     return false;
   } else {
     cout <<"Delay    " << (t - goal_time).toSec() << endl;
