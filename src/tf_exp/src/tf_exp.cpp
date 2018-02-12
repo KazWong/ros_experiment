@@ -26,7 +26,11 @@ s_Twist zero_twist;
 tf::TransformListener *nlistener;
 
 Time curr_time;
+int curr_counter;
+long total_curr;
 Time goal_time;
+int goal_counter;
+long total_goal;
 //D control var
 Time last_time;
 s_Twist last_err;
@@ -78,7 +82,6 @@ bool LookforTransform(string const target_frame, string const source_frame, s_Po
   time = transform.stamp_;
 
   cout << "tf Time  " << transform.stamp_.sec << "." << transform.stamp_.nsec << endl;
-  cout <<"Delay    " << (Time::now() - time).toSec() << endl;
   convertTFtoPose(transform, pose);
   return true;
 }
@@ -86,12 +89,22 @@ bool LookforTransform(string const target_frame, string const source_frame, s_Po
 bool FramesDistance(string const ref_frame, string const robo_frame, string const target_frame, s_Pose &curr_agv_pose, s_Pose &goal_pose,s_Pose &pose_diff) {
   ros::Time t = ros::Time::now();
   cout << "Timenow1 " << t.sec << "." << t.nsec << endl;
-  if (!LookforTransform(ref_frame, robo_frame, curr_agv_pose, curr_time))
+  if (!LookforTransform(ref_frame, robo_frame, curr_agv_pose, curr_time)) {
+    cout <<"Delay    " << (Time::now() - curr_time).toSec() << endl;
+    total_curr +=curr_time.toSec();
+    curr_counter++;
+    cout <<"Avg      " << (total_curr/curr_counter) << endl;
     return false;
+  }
   t = ros::Time::now();
   cout << "Timenow2 " << t.sec << "." << t.nsec << endl;
-  if (!LookforTransform(ref_frame, target_frame, goal_pose, goal_time))
+  if (!LookforTransform(ref_frame, target_frame, goal_pose, goal_time)) {
+    cout <<"Delay    " << (Time::now() - goal_time).toSec() << endl;
+    total_goal +=goal_time.toSec();
+    goal_counter++;
+    cout <<"Avg      " << (total_goal/goal_counter) << endl;
     return false;
+  }
   cout << "agv_x = " << curr_agv_pose.linear.x << endl;
   cout << "agv_y = " << curr_agv_pose.linear.y << endl;
   cout << "agv_omega = " << curr_agv_pose.angular.z << endl;
@@ -153,6 +166,10 @@ bool park()
     return false;
   }
 
+  curr_counter = 0;
+  goal_counter = 0;
+  total_curr = 0;
+  total_goal = 0;
 //init K controller var
   //last_time = Time::now();
  // ROS_INFO("Before check base_footprint");
