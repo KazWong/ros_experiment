@@ -61,16 +61,16 @@ bool LookforTransform(string const target_frame, string const source_frame, s_Po
   ros::Time t = ros::Time::now();
   //t -= ros::Duration(0.05);
   try{
-    nlistener->waitForTransform( target_frame, source_frame, t, ros::Duration(wait_tf));
-    //nlistener->lookupTransform( target_frame, source_frame, t, transform);
-    nlistener->lookupTransform( target_frame, t, source_frame, t, "ur_base", transform);
+    //nlistener->waitForTransform( target_frame, source_frame, t, ros::Duration(wait_tf));
+    nlistener->lookupTransform( target_frame, source_frame, ros::Time(0), transform);
+    //nlistener->lookupTransform( target_frame, t, source_frame, t, "ur_base", transform);
   }
   catch (tf::TransformException ex){
     ROS_ERROR("%s",ex.what());
     return false;
   }
 
-  cout << "tf Time " << transform.stamp_.sec << "." << transform.stamp_.nsec << endl;
+  cout << "tf Time  " << transform.stamp_.sec << "." << transform.stamp_.nsec << endl;
   convertTFtoPose(transform, pose);
   return true;
 }
