@@ -34,7 +34,7 @@
   <include file="$(find boot)/launch/ar.launch">
     <arg name="bundle" value="false"/>
     <arg name="node_name" value="$(arg node_name)_ar_indiv"/>
-    <arg name="marker_size" value="6.0" />
+    <arg name="marker_size" value="9.0" />
     <arg name="max_new_marker_error" value="0.04" />
     <arg name="max_track_error" value="0.05" />
     <arg name="cam_image_topic" value="/cam_left/image_rect_color" />
