@@ -211,3 +211,6 @@ target_link_libraries(ar_exp ${catkin_LIBRARIES})
 
 add_executable(base_laser src/laser_tf_broadcaster.cpp)
 target_link_libraries(base_laser ${catkin_LIBRARIES})
+
+add_executable(static_exp src/static_broadcaster.cpp)
+target_link_libraries(static_exp ${catkin_LIBRARIES})
