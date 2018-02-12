@@ -3,7 +3,7 @@
   <arg name="frame_id" default="real_camera_left" />
 
   <!-- Camera -->
-  <include file="$(find boot)/launch/usb_cam.launch">
+  <!-- <include file="$(find boot)/launch/usb_cam.launch">
     <arg name="node_name" value="$(arg node_name)" />
     <arg name="video_device" value="/dev/cam_left" />
     <arg name="image_width" value="800" />
@@ -12,9 +12,9 @@
     <arg name="autofocus" value="fault"/>
     <arg name="frame_rate" value="20"/>
     <arg name="image_proc" value="true"/>
-    <arg name="pixel_format" value="yuyv" /> <!-- mjpeg | yuyv -->
+    <arg name="pixel_format" value="yuyv" /> <!-- mjpeg | yuyv --
     <arg name="camera_info_url" value="file:///home/sae/.ros/camera_info/left_head_cam.yaml"/>
-  </include>
+  </include>-->
   
   <!-- AR Bundle -->
   <include file="$(find boot)/launch/ar.launch">
@@ -23,8 +23,8 @@
     <arg name="marker_size" value="9.0" />
     <arg name="max_new_marker_error" value="0.04" />
     <arg name="max_track_error" value="0.05" />
-    <arg name="cam_image_topic" value="/$(arg node_name)/image_rect_color" />
-    <arg name="cam_info_topic" value="/$(arg node_name)/camera_info" />
+    <arg name="cam_image_topic" value="/cam_left/image_rect_color" />
+    <arg name="cam_info_topic" value="/cam_left/camera_info" />
     <arg name="output_frame" value="/$(arg frame_id)_eb" />
     <arg name="bundle_files" value=" $(find description)/bundles/MarkerData_0_1_2.xml
                                      $(find description)/bundles/MarkerData_4_3_5.xml" />
@@ -37,8 +37,8 @@
     <arg name="marker_size" value="6.0" />
     <arg name="max_new_marker_error" value="0.04" />
     <arg name="max_track_error" value="0.05" />
-    <arg name="cam_image_topic" value="/$(arg node_name)/image_rect_color" />
-    <arg name="cam_info_topic" value="/$(arg node_name)/camera_info" />
+    <arg name="cam_image_topic" value="/cam_left/image_rect_color" />
+    <arg name="cam_info_topic" value="/cam_left/camera_info" />
     <arg name="output_frame" value="/$(arg frame_id)_ei" />
   </include>
 </launch>
