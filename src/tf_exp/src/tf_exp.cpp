@@ -78,6 +78,7 @@ bool LookforTransform(string const target_frame, string const source_frame, s_Po
   time = transform.stamp_;
 
   cout << "tf Time  " << transform.stamp_.sec << "." << transform.stamp_.nsec << endl;
+  cout <<"Delay    " << (Time::now() - time).toSec() << endl;
   convertTFtoPose(transform, pose);
   return true;
 }
