@@ -12,7 +12,7 @@
     <arg name="autofocus" value="fault"/>
     <arg name="frame_rate" value="20"/>
     <arg name="image_proc" value="true"/>
-    <arg name="pixel_format" value="yuyv" /> <!-- mjpeg | yuyv --
+    <arg name="pixel_format" value="yuyv" />  mjpeg | yuyv 
     <arg name="camera_info_url" value="file:///home/sae/.ros/camera_info/left_head_cam.yaml"/>
   </include>-->
   
