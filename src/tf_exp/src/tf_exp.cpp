@@ -90,20 +90,23 @@ bool FramesDistance(string const ref_frame, string const robo_frame, string cons
   ros::Time t = ros::Time::now();
   cout << "Timenow1 " << t.sec << "." << t.nsec << endl;
   if (!LookforTransform(ref_frame, robo_frame, curr_agv_pose, curr_time)) {
+    return false;
+  } else {
     cout <<"Delay    " << (Time::now() - curr_time).toSec() << endl;
     total_curr +=curr_time.toSec();
     curr_counter++;
     cout <<"Avg      " << (total_curr/curr_counter) << endl;
-    return false;
+    
   }
   t = ros::Time::now();
   cout << "Timenow2 " << t.sec << "." << t.nsec << endl;
   if (!LookforTransform(ref_frame, target_frame, goal_pose, goal_time)) {
+    return false;
+  } else {
     cout <<"Delay    " << (Time::now() - goal_time).toSec() << endl;
     total_goal +=goal_time.toSec();
     goal_counter++;
     cout <<"Avg      " << (total_goal/goal_counter) << endl;
-    return false;
   }
   cout << "agv_x = " << curr_agv_pose.linear.x << endl;
   cout << "agv_y = " << curr_agv_pose.linear.y << endl;
