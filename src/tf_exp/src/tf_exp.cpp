@@ -76,6 +76,8 @@ bool LookforTransform(string const target_frame, string const source_frame, s_Po
     return false;
   }
   
+  cout << "tf Time  " << transform.stamp_.sec << "." << transform.stamp_.nsec << endl;
+  
   if (time == transform.stamp_ && time != Time(0)) {
     ROS_ERROR("Repeated Transform");
     time = transform.stamp_;
@@ -83,8 +85,6 @@ bool LookforTransform(string const target_frame, string const source_frame, s_Po
   }
   
   time = transform.stamp_;
-
-  cout << "tf Time  " << transform.stamp_.sec << "." << transform.stamp_.nsec << endl;
   convertTFtoPose(transform, pose);
   return true;
 }
