@@ -16,7 +16,7 @@
     <arg name="camera_info_url" value="file:///home/sae/.ros/camera_info/left_head_cam.yaml"/>
   </include>-->
   
-  <!-- AR Bundle -->
+  <!-- AR Bundle 
   <include file="$(find boot)/launch/ar.launch">
     <arg name="bundle" value="true"/>
     <arg name="node_name" value="$(arg node_name)_ar_bundle"/>
@@ -28,7 +28,7 @@
     <arg name="output_frame" value="/$(arg frame_id)_eb" />
     <arg name="bundle_files" value=" $(find description)/bundles/MarkerData_0_1_2.xml
                                      $(find description)/bundles/MarkerData_4_3_5.xml" />
-  </include>
+  </include> -->
   
   <!-- AR Indiv -->
   <include file="$(find boot)/launch/ar.launch">
