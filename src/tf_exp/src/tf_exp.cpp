@@ -15,7 +15,7 @@ typedef geometry_msgs::Twist s_Pose;
 typedef geometry_msgs::Twist s_Twist;
 
 
-const double wait_tf = 0.015; //12Hz max 0.042 each in WaitForTranform
+const double wait_tf = 0.05; //12Hz max 0.042 each in WaitForTranform
 const double listener_buf = 0.7;
 
 string parking_no;
@@ -59,7 +59,7 @@ bool LookforTransform(string const target_frame, string const source_frame, s_Po
  // tf::TransformListener listener;
   tf::StampedTransform transform;
   ros::Time t = ros::Time::now();
-  t -= ros::Duration(0.05);
+  //t -= ros::Duration(0.05);
   try{
     nlistener->waitForTransform( target_frame, source_frame, t, ros::Duration(wait_tf));
     nlistener->lookupTransform( target_frame, source_frame, t, transform);
