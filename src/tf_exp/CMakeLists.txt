@@ -208,3 +208,6 @@ add_dependencies(tf_exp tf_exp_gencpp cartmove_gencpp)
 
 add_executable(ar_exp src/ar_tf_broadcaster_ht_n.cpp)
 target_link_libraries(ar_exp ${catkin_LIBRARIES})
+
+add_executable(base_laser src/laser_tf_broadcaster.cpp)
+target_link_libraries(base_laser ${catkin_LIBRARIES})
