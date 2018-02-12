@@ -25,7 +25,7 @@
     <arg name="max_track_error" value="0.05" />
     <arg name="cam_image_topic" value="/$(arg node_name)/image_rect_color" />
     <arg name="cam_info_topic" value="/$(arg node_name)/camera_info" />
-    <arg name="output_frame" value="/$(arg frame_id)" />
+    <arg name="output_frame" value="/$(arg frame_id)_eb" />
     <arg name="bundle_files" value=" $(find description)/bundles/MarkerData_0_1_2.xml
                                      $(find description)/bundles/MarkerData_4_3_5.xml" />
   </include>
@@ -39,6 +39,6 @@
     <arg name="max_track_error" value="0.05" />
     <arg name="cam_image_topic" value="/$(arg node_name)/image_rect_color" />
     <arg name="cam_info_topic" value="/$(arg node_name)/camera_info" />
-    <arg name="output_frame" value="/$(arg frame_id)" />
+    <arg name="output_frame" value="/$(arg frame_id)_ei" />
   </include>
 </launch>
