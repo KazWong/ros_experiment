@@ -27,10 +27,10 @@ tf::TransformListener *nlistener;
 
 Time curr_time;
 int curr_counter;
-long total_curr;
+double total_curr;
 Time goal_time;
 int goal_counter;
-long total_goal;
+double total_goal;
 //D control var
 Time last_time;
 s_Twist last_err;
