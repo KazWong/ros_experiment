@@ -13,6 +13,10 @@ using namespace std;
 using namespace ros;
 
 Time t;
+string priname = "static_tf";
+string key1 = "Coordinate";
+string key2 = "ID";
+string prefix = "Frame_";
 
 geometry_msgs::TransformStamped SetTF(string frame_id, string child_frame_id, tf2::Vector3 pos, tf2::Quaternion quat) {
   geometry_msgs::TransformStamped static_transformStamped;
@@ -35,7 +39,7 @@ geometry_msgs::TransformStamped SetTF(string frame_id, string child_frame_id, tf
 
 int main(int argc, char** argv){
   init(argc, argv, "paramarap");
-  NodeHandle n;
+  NodeHandle n(priname);
   
   tf2::Quaternion q;
   tf2::Vector3 pos;
@@ -43,13 +47,33 @@ int main(int argc, char** argv){
   vector<geometry_msgs::TransformStamped> static_tf;
   tf2_ros::StaticTransformBroadcaster static_broadcaster;
   
+  std::vector<string> param_name_list;
+  n.getParamNames(param_name_list);
+  cout << "static_tf param" << endl;
+  string a = "1";
+  a += std::to_string(2);
+  cout << "a" << a << endl;
+  for(int i=0; i < param_name_list.size(); i++) {
+    int ns = param_name_list[i].find(priname);
+    if (ns != std::string::npos) {
+      cout << param_name_list[i] << endl;
+      int id = param_name_list[i].find(prefix);
+      cout << "ns " << param_name_list[i][ns] << " id " << param_name_list[i][id]  << endl;
+      cout << "ns " << param_name_list[i][ns+priname.length()+1] << " id " << param_name_list[i][id-2]  << endl;
+      /*if (param_name_list[i].find(key1) != std::string::npos) {
+      
+      } else if (param_name_list[i].find(key2) != std::string::npos) {
+      
+      }*/
+      
+    }
+  }
   
-  //static tf
-  q.setRPY(0.0, 0.0, 0.0);
-  pos.setValue(0.0, 0.0, 0.0);
-  static_tf.push_back(SetTF("map", "pam", pos, q));
-
+  /*q.setRPY(-1.635, -0.103, 0.038);
+  pos.setValue(0.127, -0.493, 1.235);
+  static_tf.push_back(SetTF("ar_marker_0", "ar_parked_CS", pos, q));*/
+  
   static_broadcaster.sendTransform(static_tf);
   
-  //spin();
+  spin();
 }

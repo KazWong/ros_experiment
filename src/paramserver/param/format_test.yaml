@@ -25,15 +25,47 @@ quick:
   - 2.3
   - 2.4
   - 2.5
-  
-qq:
-  quick1:
+
+ds:
+  d:
     - 2.0
     - 2.1
     - 2.2
     - 2.3
     - 2.4
     - 2.5
+  s: mama
+
+dns:
+  s: mama
+dns:
+  d:
+    - 2.0
+    - 2.1
+    - 2.2
+    - 2.3
+    - 2.4
+    - 2.5
+  
+#work for private namespace, rewrite by ns= in roslaunch
+format_test:
+  quick:
+    - 1112.0
+    - 1112.1
+    - 1112.2
+    - 1112.3
+    - 1112.4
+    - 1112.5
+
+#work for private namespace, rewrite by ns= in roslaunch
+some_namespace:
+  quick:
+    - 1112.0
+    - 1112.1
+    - 1112.2
+    - 1112.3
+    - 1112.4
+    - 1112.5
 
 EE:  
   CS:

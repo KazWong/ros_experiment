@@ -1,0 +1,22 @@
+nav_goal_CS:
+  Parent:
+    - map
+  Coordinate:
+    - 1.006
+    - 0.214
+    - 0.000
+    - 0.000
+    - -0.000
+    - -1.530
+ 
+nav_goal_HT: 
+  Parent: map
+  Coordinate: [ 0.952, 0.324, 0.000, -0.000, -0.000, 3.125 ]
+  
+nav_goal_CNC: 
+  Parent: map
+  Coordinate: [ -0.554, -0.578, 0.000, -0.000, -0.000, 1.518 ]
+
+nav_goal_N_CNC: 
+  Parent: nav_goal_CNC
+  Coordinate: [0.0, 0.0, 0.0, 0.0, 0.0, 3.14]

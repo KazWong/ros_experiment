@@ -1,4 +1,13 @@
 <launch>
-  <rosparam file="$(find paramserver)/param/tf_format_test.yaml" command="load"/>
-  <node pkg="paramserver" name="param_exp" type="format_test" output="screen"></node>
+  <rosparam file="$(find paramserver)/param/format_test.yaml" command="load"/>
+  <rosparam file="$(find paramserver)/param/format_test_g.yaml" command="load" ns="some_namespace"/>
+  <rosparam file="$(find paramserver)/param/format_test_p.yaml" command="load" ns="format_test"/>
+  
+  <!-- <rosparam file="$(find paramserver)/param/navgoal_tf.yaml" command="load" ns="static_tf"/>
+  <rosparam file="$(find paramserver)/param/ar_tf.yaml" command="load" ns="static_tf"/> -->
+  
+  <rosparam file="$(find paramserver)/param/tf_3_0.yaml" command="load" ns="static_tf"/>
+  
+  <!-- <node pkg="paramserver" name="format_test" type="format_test" output="screen"></node> -->
+  <node pkg="paramserver" name="param" type="param" output="screen"></node>
 </launch>
