@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(tf_exp)
-## Add support for C++11, supported in ROS Kinetic and newer
-# add_definitions(-std=c++11)
+project(paramserver)
+
+## Compile as C++11, supported in ROS Kinetic and newer
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -57,8 +58,9 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## Generate services in the 'srv' folder
 # add_service_files(
-#    FILES
-#    Park_Unpark.srv
+#   FILES
+#   Service1.srv
+#   Service2.srv
 # )
 
 ## Generate actions in the 'action' folder
@@ -70,8 +72,8 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
-#    DEPENDENCIES
-#    std_msgs  # Or other packages containing msgs
+#   DEPENDENCIES
+#   std_msgs  # Or other packages containing msgs
 # )
 
 ################################################
@@ -99,14 +101,14 @@ find_package(catkin REQUIRED COMPONENTS
 ###################################
 ## The catkin_package macro generates cmake config files for your package
 ## Declare things to be passed to dependent projects
-## INCLUDE_DIRS: uncomment this if you package contains header files
+## INCLUDE_DIRS: uncomment this if your package contains header files
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES learning_tf
-#  CATKIN_DEPENDS roscpp rospy tf turtlesim
+#  LIBRARIES paramserver
+#  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
 
@@ -116,14 +118,13 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-# include_directories(include)
 include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/learning_tf.cpp
+#   src/${PROJECT_NAME}/paramserver.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -134,7 +135,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/learning_tf_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/paramserver_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -150,6 +151,12 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+
+add_executable(param src/static_broadcaster.cpp)
+target_link_libraries(param ${catkin_LIBRARIES})
+
+add_executable(format_test src/tf_format_test.cpp)
+target_link_libraries(format_test ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -191,26 +198,10 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_learning_tf.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_paramserver.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-
-#add_executable(tf_exp src/calculateCmdVel.cpp)
-#target_link_libraries(tf_exp ${catkin_LIBRARIES})
-
-add_executable(tf_exp src/tf_exp.cpp)
-target_link_libraries(tf_exp ${catkin_LIBRARIES})
-add_dependencies(tf_exp tf_exp_gencpp cartmove_gencpp)
-
-add_executable(ar_exp src/ar_tf_broadcaster_ht_n.cpp)
-target_link_libraries(ar_exp ${catkin_LIBRARIES})
-
-add_executable(base_laser src/laser_tf_broadcaster.cpp)
-target_link_libraries(base_laser ${catkin_LIBRARIES})
-
-add_executable(static_exp src/static_broadcaster.cpp)
-target_link_libraries(static_exp ${catkin_LIBRARIES})

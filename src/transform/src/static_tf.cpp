@@ -7,7 +7,7 @@
 using namespace std;
 
 int main(int argc, char** argv){
-  ros::init(argc, argv, "ar_tf_broadcaster_ht");
+  ros::init(argc, argv, "exp_static");
   ros::NodeHandle n;
   tf::Quaternion q;
   tf::Vector3 pos;

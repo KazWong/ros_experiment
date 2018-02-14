@@ -1,0 +1,4 @@
+<launch>
+  <rosparam file="$(find paramserver)/param/tf_format_test.yaml" command="load"/>
+  <node pkg="paramserver" name="param_exp" type="format_test" output="screen"></node>
+</launch>

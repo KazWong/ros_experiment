@@ -32,7 +32,7 @@ geometry_msgs::TransformStamped SetTF(string frame_id, string child_frame_id, tf
 }
 
 int main(int argc, char** argv){
-  init(argc, argv, "static_tf_broadcaster");
+  init(argc, argv, "exp_static_tf_broadcaster");
   NodeHandle n;
   
   tf2::Quaternion q;
