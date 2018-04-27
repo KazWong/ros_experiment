@@ -1,0 +1,3 @@
+[submodule "src/cartmove"]
+	path = src/cartmove
+	url = /srv/ros/driver/cartmove.git/
