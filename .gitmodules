@@ -5,3 +5,7 @@
 	path = src/usb_cam
 	url = sae@kaz:/srv/robo/driver/usb_cam.git/
 	branch = develop
+[submodule "src/description"]
+	path = src/description
+	url = sae@kaz:/srv/robo/ghost/description.git/
+	branch = release
