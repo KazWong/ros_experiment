@@ -1,3 +1,7 @@
 [submodule "src/cartmove"]
 	path = src/cartmove
-	url = /srv/ros/driver/cartmove.git/
+	url = sae@kaz:/srv/ros/driver/cartmove.git/
+[submodule "src/usb_cam"]
+	path = src/usb_cam
+	url = sae@kaz:/srv/robo/driver/usb_cam.git/
+	branch = develop
