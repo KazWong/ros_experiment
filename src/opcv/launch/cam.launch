@@ -7,10 +7,11 @@
     <arg name="node_name" value="$(arg node_name)" />
     <arg name="video_device" value="/dev/video0" />
     <arg name="image_width" value="800" />
-    <arg name="image_height" value="448" />
+    <arg name="image_height" value="600" />
     <arg name="camera_frame_id" value="$(arg frame_id)" />
     <arg name="autofocus" value="true"/>
     <arg name="autoexposure" value="false" />
+    <arg name="exposure" value="500" />
     <arg name="frame_rate" value="5"/>
     <arg name="image_proc" value="false"/>
     <arg name="pixel_format" value="yuyv" /> <!-- mjpeg | yuyv -->
