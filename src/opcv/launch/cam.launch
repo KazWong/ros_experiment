@@ -6,15 +6,15 @@
   <include file="$(find opcv)/launch/usb_cam.launch">
     <arg name="node_name" value="$(arg node_name)" />
     <arg name="video_device" value="/dev/video0" />
-    <arg name="image_width" value="800" />
-    <arg name="image_height" value="600" />
+    <arg name="image_width" value="1920" />
+    <arg name="image_height" value="1080" />
     <arg name="camera_frame_id" value="$(arg frame_id)" />
     <arg name="autofocus" value="true"/>
     <arg name="autoexposure" value="false" />
     <arg name="exposure" value="500" />
-    <arg name="frame_rate" value="5"/>
+    <arg name="frame_rate" value="20"/>
     <arg name="image_proc" value="false"/>
-    <arg name="pixel_format" value="yuyv" /> <!-- mjpeg | yuyv -->
+    <arg name="pixel_format" value="mjpeg" /> <!-- mjpeg | yuyv -->
     <arg name="camera_info_url" value="file:///home/sae/.ros/camera_info/cam.yaml"/>
   </include>
   
