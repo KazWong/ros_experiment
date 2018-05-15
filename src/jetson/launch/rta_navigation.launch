@@ -1,0 +1,64 @@
+<launch>
+  <!-- <group ns=""> -->
+    <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="--delete_db_on_start">
+          <param name="frame_id" type="string" value="base_footprint"/>
+
+          <param name="subscribe_depth" type="bool" value="true"/>
+          <param name="subscribe_scan" type="bool" value="true"/>
+
+          <remap from="odom" to="/odom"/>
+          <remap from="scan" to="/scan"/>
+
+          <remap from="rgb/image" to="/zed/rgb/image_rect_color"/>
+          <remap from="depth/image" to="/zed/depth/depth_registered"/>
+          <remap from="rgb/camera_info" to="/zed/rgb/camera_info"/>
+
+          <param name="queue_size" type="int" value="100"/>
+          
+          <remap from="grid_map" to="/map"/>
+
+          <!-- RTAB-Map's parameters -->
+          <param name="RGBD/NeighborLinkRefining" type="string" value="true"/>
+          <param name="RGBD/ProximityBySpace"     type="string" value="true"/>
+          <param name="RGBD/AngularUpdate"        type="string" value="0.01"/>
+          <param name="RGBD/LinearUpdate"         type="string" value="0.01"/>
+          <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false"/>
+          <param name="Optimizer/Slam2D"          type="string" value="true"/>
+          <param name="Reg/Strategy"              type="string" value="1"/> <!-- 1=ICP -->
+          <param name="Reg/Force3DoF"             type="string" value="true"/>
+          <param name="Vis/MinInliers"            type="string" value="5"/>
+          <param name="Vis/InlierDistance"        type="string" value="0.1"/>
+          <param name="Rtabmap/TimeThr"           type="string" value="700"/>
+          <param name="Mem/RehearsalSimilarity"   type="string" value="0.45"/>
+    </node>
+  <!-- </group> -->
+  
+  <!-- boot -->
+  <include file="$(find boot)/launch/boot.launch">
+    <arg name="sim" value="false"/>
+    <arg name="tf" value="true"/>
+    <arg name="amcl" value="false"/>
+    <arg name="agv" value="true"/>
+    <arg name="lidar" value="true"/>
+    
+    <!-- <arg name="map_file" value="$(arg map_file)"/> -->
+    <!-- <arg name="sick_ip" value="192.168.2.2"/> -->
+    <arg name="sweep_port" value="/dev/ttyUSB0"/>
+    <arg name="sweep" default="true" />
+    <arg name="keyboard" value="false"/>
+    <arg name="joystick" value="false"/>
+    
+    <arg name="rotation_speed" value="5"/>
+    <arg name="sample_rate" value="1000"/>
+  
+    <arg name="angle_min" value="-3.1415926"/>
+    <arg name="angle_max" value="3.1415926"/>
+    <arg name="range_min" value="0.54"/>
+    <arg name="range_max" value="40.0"/>
+    
+    <arg name="duration" value="5m"/>
+    <arg name="split" value="100"/>
+  </include>
+  
+  <include file="$(find navigation_param)/launch/move_base.launch"/>
+</launch>

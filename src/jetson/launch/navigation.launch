@@ -1,0 +1,33 @@
+<launch>
+  <!-- Hardware config -->
+  <rosparam file="$(find config)/param/hardware.yaml" ns="hardware" command="load"/> 
+  <!-- Map -->
+  <arg name="map_file" default="$(find environment)/maps/3_14_lab_3.yaml"/> 
+
+  <!-- boot -->
+  <include file="$(find boot)/launch/boot.launch">
+    <arg name="sim" value="false"/>
+    <arg name="tf" value="true"/>
+    <arg name="amcl" value="true"/>
+    <arg name="agv" value="true"/>
+    <arg name="lidar" value="true"/>
+    
+    <arg name="map_file" value="$(arg map_file)"/>
+    <!-- <arg name="sick_ip" value="192.168.2.2"/> -->
+    <arg name="sweep_port" value="/dev/ttyUSB0"/>
+    <arg name="sweep" default="true" />
+    <arg name="keyboard" value="false"/>
+    <arg name="joystick" value="false"/>
+    
+    <arg name="rotation_speed" value="5"/>
+    <arg name="sample_rate" value="1000"/>
+  
+    <arg name="angle_min" value="-3.1415926"/>
+    <arg name="angle_max" value="3.1415926"/>
+    <arg name="range_min" value="0.54"/>
+    <arg name="range_max" value="40.0"/>
+    
+    <arg name="duration" value="5m"/>
+    <arg name="split" value="100"/>
+  </include>
+</launch>

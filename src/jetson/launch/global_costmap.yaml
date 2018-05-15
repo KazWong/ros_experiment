@@ -1,0 +1,56 @@
+global_costmap:
+  global_frame: /map
+  robot_base_frame: /base_footprint
+  rolling_window: false
+  always_send_full_costmap: false
+  map_type: costmap #obstacle layer
+  static_map: true #static layer
+  
+  #dynamic reconfigure
+  transform_tolerance: 2.0
+  update_frequency: 1.0
+  publish_frequency: 1.0
+  #width:20.0
+  #height:20.0
+  #resolution:0.2
+  origin_x: 0.0
+  origin_y: 0.0
+  footprint: [[-0.16, -0.12], [-0.16, 0.12], [0.16,0.12], [0.18,0], [0.16, -0.12]]
+  robot_radius: 0.0
+  footprint_padding: 0.1
+  
+  inflation_layer:
+    enabled: true
+    #cost_scaling_factor:(defined in global path planner)
+    inflation_radius: 2.0
+    inflate_unknown: false
+    
+  obstacle_layer:
+    enabled: true
+    track_unknown_space: true
+    footprint_clearing_enabled: true
+    combination_method: 1
+    
+    #Global Filtering Parameters
+    max_obstacle_height: 1.8
+    obstacle_range: 6.0
+    raytrace_range: 18.0
+    
+    #Sensor management parameters
+    observation_sources: scan
+    scan: {data_type: LaserScan, topic: scan, marking: true, clearing: true}
+    
+  static_layer:
+    enabled: true
+    unknown_cost_value: -1
+    lethal_cost_threshold: 100
+    first_map_only: false
+    #subscribe_to_updates:true
+    track_unknown_space: true
+    use_maximum: false
+    trinary_costmap: true
+  
+#  plugins:
+#    - {name: static_layer,            type: "costmap_2d::StaticLayer"}
+#    - {name: obstacle_layer,          type: "costmap_2d::VoxelLayer"}
+#    - {name: inflation_layer,         type: "costmap_2d::InflationLayer"}
