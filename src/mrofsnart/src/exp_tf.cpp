@@ -23,12 +23,22 @@ int main(int argc, char** argv){
   while(n.ok()){
     broadcaster.sendTransform(
       tf::StampedTransform(
+        tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(laser_x, laser_y, laser_z)),
+        ros::Time::now(),"base_footprint", "zed_camera"));
+    broadcaster.sendTransform(
+      tf::StampedTransform(
+        tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(laser_x, laser_y, laser_z)),
+        ros::Time::now(),"base_footprint", "sweep_lidar"));
+    broadcaster.sendTransform(
+      tf::StampedTransform(
         tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(cam_x, cam_y, cam_z)),
         ros::Time::now(),"base_footprint", "cam"));
     broadcaster.sendTransform(
       tf::StampedTransform(
         tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(laser_x, laser_y, laser_z)),
         ros::Time::now(),"base_footprint", "base_laser"));
+        
+        
     broadcaster.sendTransform(
       tf::StampedTransform(
         tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(0.0, 0.0, 0.0)),

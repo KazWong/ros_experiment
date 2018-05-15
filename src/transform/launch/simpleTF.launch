@@ -1,3 +1,0 @@
-<launch>
-  <node name="base_laser_broadcaster" pkg="transform" type="base_laser" />
-</launch>

@@ -1,18 +1,17 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(transform)
-## Add support for C++11, supported in ROS Kinetic and newer
-add_definitions(-std=c++11)
+project(cfg404)
+
+## Compile as C++11, supported in ROS Kinetic and newer
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  dynamic_reconfigure
+  dynre
   roscpp
   rospy
-  tf
-  std_msgs
-  message_generation
-  description
 )
 
 ## System dependencies are found with CMake's conventions
@@ -34,10 +33,10 @@ find_package(catkin REQUIRED COMPONENTS
 ##   your messages/services/actions (e.g. std_msgs, actionlib_msgs, ...).
 ## * In the file package.xml:
 ##   * add a build_depend tag for "message_generation"
-##   * add a build_depend and a run_depend tag for each package in MSG_DEP_SET
+##   * add a build_depend and a exec_depend tag for each package in MSG_DEP_SET
 ##   * If MSG_DEP_SET isn't empty the following dependency has been pulled in
 ##     but can be declared for certainty nonetheless:
-##     * add a run_depend tag for "message_runtime"
+##     * add a exec_depend tag for "message_runtime"
 ## * In this file (CMakeLists.txt):
 ##   * add "message_generation" and every package in MSG_DEP_SET to
 ##     find_package(catkin REQUIRED COMPONENTS ...)
@@ -57,8 +56,9 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## Generate services in the 'srv' folder
 # add_service_files(
-#    FILES
-#    Park_Unpark.srv
+#   FILES
+#   Service1.srv
+#   Service2.srv
 # )
 
 ## Generate actions in the 'action' folder
@@ -70,8 +70,8 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
-#    DEPENDENCIES
-#    std_msgs  # Or other packages containing msgs
+#   DEPENDENCIES
+#   std_msgs  # Or other packages containing msgs
 # )
 
 ################################################
@@ -81,7 +81,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## To declare and build dynamic reconfigure parameters within this
 ## package, follow these steps:
 ## * In the file package.xml:
-##   * add a build_depend and a run_depend tag for "dynamic_reconfigure"
+##   * add a build_depend and a exec_depend tag for "dynamic_reconfigure"
 ## * In this file (CMakeLists.txt):
 ##   * add "dynamic_reconfigure" to
 ##     find_package(catkin REQUIRED COMPONENTS ...)
@@ -99,14 +99,14 @@ find_package(catkin REQUIRED COMPONENTS
 ###################################
 ## The catkin_package macro generates cmake config files for your package
 ## Declare things to be passed to dependent projects
-## INCLUDE_DIRS: uncomment this if you package contains header files
+## INCLUDE_DIRS: uncomment this if your package contains header files
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES learning_tf
-#  CATKIN_DEPENDS roscpp rospy tf turtlesim
+#  LIBRARIES cfg404
+#  CATKIN_DEPENDS dynamic_reconfigure dynre roscpp rospy
 #  DEPENDS system_lib
 )
 
@@ -116,15 +116,22 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-# include_directories(include)
 include_directories(
+# include
   ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/learning_tf.cpp
+#   src/${PROJECT_NAME}/cfg404.cpp
 # )
+
+add_executable(config404 src/main.cpp)
+# add_dependencies(config404 ${dynre_EXPORTED_TARGETS})
+target_link_libraries(config404 
+  ${catkin_LIBRARIES}
+  #${dynre_LIBRARIES}
+)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -134,7 +141,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/learning_tf_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/cfg404_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -191,25 +198,10 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_learning_tf.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_cfg404.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-
-#add_executable(transform src/calculateCmdVel.cpp)
-#target_link_libraries(transform ${catkin_LIBRARIES})
-
-#add_executable(tf_exp src/tf_exp.cpp)
-#target_link_libraries(tf_exp ${catkin_LIBRARIES})
-
-add_executable(ar_exp src/ar_tf_broadcaster_ht_n.cpp)
-target_link_libraries(ar_exp ${catkin_LIBRARIES})
-
-add_executable(base_laser src/laser_tf_broadcaster.cpp)
-target_link_libraries(base_laser ${catkin_LIBRARIES})
-
-add_executable(static_exp src/static_broadcaster.cpp)
-target_link_libraries(static_exp ${catkin_LIBRARIES})
