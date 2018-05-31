@@ -41,24 +41,17 @@ int main(int argc, char** argv){
   vector<geometry_msgs::TransformStamped> static_tf;
   tf2_ros::StaticTransformBroadcaster static_broadcaster;
   
-  
-  double laser_x, laser_y, laser_z;
-
-  n.getParam("/Laser/laser_x", laser_x);
-  n.getParam("/Laser/laser_y", laser_y);
-  n.getParam("/Laser/laser_z", laser_z);
-  
-
-  //pos.setValue(laser_x, laser_y, laser_z);
-  //static_tf.push_back(SetTF("base_footprint", "base_laser", pos, tf::Quaternion(0, 0, 0, 1)));
-  
   q.setRPY(0.0, 0.0, 0.0);
-  pos.setValue(0.0, 0.0, 0.0);
-  static_tf.push_back(SetTF("real_camera_left", "real_camera_left_ei", pos, q));
+  pos.setValue(0.2, -1.7, 0.0);
+  static_tf.push_back(SetTF("map", "darling_in_store", pos, q));
   
   q.setRPY( 0.0, 0.0, 0.0);
-  pos.setValue(0.0, 0.0, 0.0);
-  static_tf.push_back(SetTF("real_camera_left", "real_camera_left_eb", pos, q));
+  pos.setValue(4.0, -2.0, 0.0);
+  static_tf.push_back(SetTF("map", "darling_in_franxx", pos, q));
+
+  q.setRPY( 0.0, 0.0, 0.0);
+  pos.setValue(17.0, -2.0, 0.0);
+  static_tf.push_back(SetTF("map", "darling_in_washroom", pos, q));
   
   
   
