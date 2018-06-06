@@ -1,0 +1,9 @@
+<launch>
+  <arg name="name" default="printkp"/>
+  
+  <node pkg="launtest" type="printkp" name="$(arg name)" output="screen">
+    <rosparam file="$(find launtest)/param/kp8964.yaml"/>
+  </node>
+  
+  <rosparam file="$(find launtest)/param/kp100.yaml"/>
+</launch>

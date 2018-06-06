@@ -1,17 +1,14 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(cfg404)
+project(launtest)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_options(-std=c++11)
+# add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  dynamic_reconfigure
-  dynre
   roscpp
-  rospy
 )
 
 ## System dependencies are found with CMake's conventions
@@ -105,8 +102,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES cfg404
-#  CATKIN_DEPENDS dynamic_reconfigure dynre roscpp rospy
+#  LIBRARIES launtest
+#  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
 
@@ -117,21 +114,19 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/cfg404.cpp
+#   src/${PROJECT_NAME}/launtest.cpp
 # )
 
-# add_executable(config404 src/main.cpp)
-# add_dependencies(config404 ${dynre_EXPORTED_TARGETS})
-# target_link_libraries(config404 
-  #${catkin_LIBRARIES}
-  #${dynre_LIBRARIES}
-#)
+add_executable(printkp src/printkp.cpp)
+target_link_libraries(printkp
+  ${catkin_LIBRARIES}
+)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -141,7 +136,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/cfg404_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/launtest_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -198,7 +193,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_cfg404.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_launtest.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

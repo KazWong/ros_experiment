@@ -1,0 +1,36 @@
+<launch>
+  <arg name="agv" default="$(find launtest)/launch/agv.launch"/>
+
+  <rosparam file="$(find launtest)/param/kp8.yaml"/>
+  
+  <include file="$(arg agv)">
+    <arg name="name" value="n01"/>
+  </include>
+  <include file="$(arg agv)">
+    <arg name="name" value="n02"/>
+  </include>
+  <include file="$(arg agv)">
+    <arg name="name" value="n03"/>
+  </include>
+  <include file="$(arg agv)">
+    <arg name="name" value="n04"/>
+  </include>
+  
+  <rosparam file="$(find launtest)/param/kp100.yaml"/>
+  
+  <include file="$(arg agv)">
+    <arg name="name" value="n05"/>
+  </include>
+  <include file="$(arg agv)">
+    <arg name="name" value="n06"/>
+  </include>
+  <include file="$(arg agv)">
+    <arg name="name" value="n07"/>
+  </include>
+  <include file="$(arg agv)">
+    <arg name="name" value="n08"/>
+  </include>
+  
+  <rosparam file="$(find launtest)/param/kp689.yaml"/>
+  <!-- <rosparam file="$(find launtest)/param/no_this_file.yaml"/> -->
+</launch>
