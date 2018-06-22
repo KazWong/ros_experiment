@@ -7,7 +7,7 @@
 
 class KisXX {
 private:
-  typedef dynamic_reconfigure::Server<dynre::confignameConfig> drs;
+  typedef dynamic_reconfigure::Server<config404::confignameConfig> drs;
   std::shared_ptr<drs> drs_;
 
   std::string _WhyWhytellmewhy;
@@ -20,7 +20,7 @@ public:
     drs_->setCallback(cb);
   }
   
-  void reconfigureCallback(dynre::confignameConfig& config, uint32_t level) {
+  void reconfigureCallback(config404::confignameConfig& config, uint32_t level) {
     _WhyWhytellmewhy = config.WhyWhytellmewhy;
   }
   

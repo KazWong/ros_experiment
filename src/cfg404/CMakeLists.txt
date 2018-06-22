@@ -126,12 +126,12 @@ include_directories(
 #   src/${PROJECT_NAME}/cfg404.cpp
 # )
 
-# add_executable(config404 src/main.cpp)
-# add_dependencies(config404 ${dynre_EXPORTED_TARGETS})
-# target_link_libraries(config404 
-  #${catkin_LIBRARIES}
-  #${dynre_LIBRARIES}
-#)
+add_executable(config404 src/main.cpp)
+add_dependencies(config404 ${dynre_EXPORTED_TARGETS})
+target_link_libraries(config404 
+  ${catkin_LIBRARIES}
+  ${dynre_LIBRARIES}
+)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
