@@ -32,11 +32,10 @@ int main(int argc, char **argv) {
     //std::time_t hnow_c = std::chrono::high_resolution_clock::to_time_t(htnow);
     long snow_c = std::chrono::duration_cast<std::chrono::nanoseconds>(stnow.time_since_epoch()).count();
     long hnow_c = std::chrono::duration_cast<std::chrono::nanoseconds>(htnow.time_since_epoch()).count();
-    double rnow_c = rtnow.toNSec();
   
     std::cout << "steady_clock\t\t" << (long)(snow_c/1e9) << "." << (long)snow_c%(long)1e9 << "\t" << sdt.count() << std::endl;
     std::cout << "high_resolution_clock\t" << (long)(hnow_c/1e9) << "." << (long)hnow_c%(long)1e9 << "\t" << hdt.count() << std::endl;
-    std::cout << "ros::Time\t\t" << (long)(rnow_c/1e9) << "." << (long)rnow_c%(long)1e9 << "\t" << rdt << std::endl;
+    std::cout << "ros::Time\t\t" << rtnow.sec << "." << rtnow.nsec << "\t" << rdt << std::endl;
     
     ros::spinOnce();
     sleep(1);
