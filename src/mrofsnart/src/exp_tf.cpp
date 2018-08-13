@@ -37,6 +37,15 @@ int main(int argc, char** argv){
       tf::StampedTransform(
         tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(laser_x, laser_y, laser_z)),
         ros::Time::now(),"base_footprint", "base_laser"));
+    
+    broadcaster.sendTransform(
+      tf::StampedTransform(
+        tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(laser_x, laser_y, laser_z+0.2)),
+        ros::Time::now(),"base_footprint", "laser0"));
+    broadcaster.sendTransform(
+      tf::StampedTransform(
+        tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(laser_x, laser_y, laser_z+0.4)),
+        ros::Time::now(),"base_footprint", "laser1"));
         
         
     broadcaster.sendTransform(
