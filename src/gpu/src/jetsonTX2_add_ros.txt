@@ -1,0 +1,19 @@
+==20515== NVPROF is profiling process 20515, command: ../../../devel/lib/gpu/gpu_node
+==20515== Warning: Unified Memory Profiling is not supported on the underlying platform. System requirements for unified memory can be found at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#um-requirements
+==20515== Profiling application: ../../../devel/lib/gpu/gpu_node
+[0m[ INFO] [1534494664.802800558]: Start gpu_add[0m
+[0m[ INFO] [1534494665.230067850]: Max error: 0.000000[0m
+==20515== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  1.8400ms         1  1.8400ms  1.8400ms  1.8400ms  GPU_add(int, float*, float*)
+      API calls:   97.82%  197.74ms         2  98.870ms  95.104us  197.65ms  cudaMallocManaged
+                    0.99%  2.0005ms         1  2.0005ms  2.0005ms  2.0005ms  cudaDeviceSynchronize
+                    0.61%  1.2408ms         2  620.41us  569.37us  671.45us  cudaFree
+                    0.50%  1.0146ms         1  1.0146ms  1.0146ms  1.0146ms  cudaLaunch
+                    0.06%  117.50us        94  1.2500us     704ns  24.704us  cuDeviceGetAttribute
+                    0.01%  11.520us         3  3.8400us     416ns  9.6000us  cudaSetupArgument
+                    0.00%  9.3760us         1  9.3760us  9.3760us  9.3760us  cuDeviceTotalMem
+                    0.00%  7.7760us         3  2.5920us  1.1200us  4.7680us  cuDeviceGetCount
+                    0.00%  6.4000us         1  6.4000us  6.4000us  6.4000us  cudaConfigureCall
+                    0.00%  3.2000us         2  1.6000us  1.2160us  1.9840us  cuDeviceGet
+                    0.00%  2.0480us         1  2.0480us  2.0480us  2.0480us  cuDeviceGetName

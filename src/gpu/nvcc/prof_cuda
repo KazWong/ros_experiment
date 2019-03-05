@@ -1,0 +1,3 @@
+#!/bin/bash
+
+nvprof ./add_cuda

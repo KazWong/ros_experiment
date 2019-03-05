@@ -1,0 +1,3 @@
+#!/bin/bash
+
+gprof -b add gmon.out

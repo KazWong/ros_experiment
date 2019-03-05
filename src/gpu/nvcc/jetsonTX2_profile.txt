@@ -1,0 +1,18 @@
+==20334== NVPROF is profiling process 20334, command: ./add
+==20334== Warning: Unified Memory Profiling is not supported on the underlying platform. System requirements for unified memory can be found at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#um-requirements
+Max error: 0
+==20334== Profiling application: ./add
+==20334== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  1.8454ms         1  1.8454ms  1.8454ms  1.8454ms  add(int, float*, float*)
+      API calls:   97.95%  204.19ms         2  102.10ms  81.856us  204.11ms  cudaMallocManaged
+                    0.96%  1.9953ms         1  1.9953ms  1.9953ms  1.9953ms  cudaDeviceSynchronize
+                    0.55%  1.1365ms         2  568.25us  501.85us  634.65us  cudaFree
+                    0.48%  1.0101ms         1  1.0101ms  1.0101ms  1.0101ms  cudaLaunch
+                    0.04%  83.646us        94     889ns     512ns  16.864us  cuDeviceGetAttribute
+                    0.01%  14.175us         3  4.7250us     480ns  12.063us  cudaSetupArgument
+                    0.00%  7.2640us         1  7.2640us  7.2640us  7.2640us  cuDeviceTotalMem
+                    0.00%  6.0160us         3  2.0050us     768ns  3.1360us  cuDeviceGetCount
+                    0.00%  5.8880us         1  5.8880us  5.8880us  5.8880us  cudaConfigureCall
+                    0.00%  2.8480us         2  1.4240us  1.2800us  1.5680us  cuDeviceGet
+                    0.00%  1.2800us         1  1.2800us  1.2800us  1.2800us  cuDeviceGetName

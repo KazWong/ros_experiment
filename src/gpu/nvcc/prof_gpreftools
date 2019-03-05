@@ -1,0 +1,8 @@
+#!/bin/bash
+
+pprof --text ./add add_main.log
+
+pprof --callgrind ./add add_main.log > add.res
+kcachegrind add.res
+
+pprof --pdf ./add add_main.log > add_cpu.pdf
